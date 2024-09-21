@@ -125,18 +125,18 @@ The steps to task 1 solution are as follows:
 
 3. Install the required packages using npm install.
    - Install Node js and npm :
-     ```bash
-    apt install nodejs -y 
-    node --version # check node version
-    apt install npm -y
-    npm --version # check npm version
-     ```
+    ```bash
+      apt install nodejs -y 
+      node --version # check node version
+      apt install npm -y
+      npm --version # check npm version
+    ```
 
 4. The Nginx configuration is as follows:
    - Edit config file  :
-     ```bash
-    vi /etc/nginx/sites-available/default
-     ```
+    ```bash
+      vi /etc/nginx/sites-available/default
+    ```
    - Add below configuration # Note add you LB and Cname
     ```
     server {
