@@ -175,13 +175,13 @@ The steps to task 1 solution are as follows:
     ```
 
 5. start application  
-   - Clone the repo  :
+   - start  :
      ```bash
      npm install
      ```
 
 6. Run  application as backend process  
-   - Clone the repo  :
+   - Run  :
      ```bash
         node index.js
         nohup node index.js > output.log 2>&1 & # backend run
