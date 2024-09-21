@@ -90,25 +90,89 @@ Architecture diagram :
      apt-get install nginx
      ```
 
-     
    - check Nginx status:
      ```bash
      systemctl status nginx
      ```
 
-     - check Nginx status:
+   - check Nginx status :
      ```bash
      systemctl status nginx
      ```
-    
-    - Install Node js and npm :
 
+## Task 1 - Backend Configuration
+- Clone the repository and navigate to the backend directory.
+- The backend runs on port 3000. Set up a reverse proxy using nginx to ensure smooth deployment on EC2.
+- Update the .env file to incorporate database connection details and port information.
+
+### Solution
+The steps to task 1 solution are as follows:
+1. Clone the repository and navigate to the backend directory.
+   - Clone the repo  :
      ```bash
-     apt install nodejs -y 
+     git clone https://github.com/MrSRE/herovired_MERN-stack.git
+     ```
+2. Add below MongoDB confugirations to .env file
+   - Clone the repo  :
+     ```bash
+     cd frontend
+     vi .env
+
+     # add below 
+     MONGO_URI=mongodb://localhost:27017/herovired # NOTE : 'mongodb+srv://pkgajula1997:xxxxxxxx@travel1.heava.mongodb.net/xxxxxy_pavan'
+     PORT=3001
+     ```
+
+3. Install the required packages using npm install.
+   - Install Node js and npm :
+     ```bash
+    apt install nodejs -y 
     node --version # check node version
     apt install npm -y
     npm --version # check npm version
      ```
+
+4. The Nginx configuration is as follows:
+   - Edit config file  :
+     ```bash
+    vi /etc/nginx/sites-available/default
+     ```
+   - Add below configuration # Note add you LB and Cname
+    ```
+    server {
+        listen 80;
+        server_name travel.close.today Travel-memory-LB-1524939564.us-west-2.elb.amazonaws.com ;
+    
+        location / {
+            proxy_pass http://localhost:3000/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    
+        # Serve static assets (JavaScript, CSS, etc.) from the frontend container
+        location /static/ {
+            proxy_pass http://localhost:3000/static/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    
+        location /backend/ {
+            proxy_pass http://localhost:3001/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+    
+            # Disable caching for this location
+            proxy_buffering off;
+        }
+    }
+
+    ```
 
 
 ----
