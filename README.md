@@ -69,19 +69,47 @@ Architecture diagram :
 
 ![image](https://github.com/user-attachments/assets/1bbaae8d-2525-46a1-ac99-66d9cbd3e6b1)
 
+10. Lunch EC2 Instant in Public subnet
 
-pkgajula1997
-14f9m5KwJORsz8p8
-
-apt-get update
-apt-get upgrade -y
+<img width="776" alt="image" src="https://github.com/user-attachments/assets/bb64c919-367b-4813-998d-f111f829a118">
 
 
-apt install nodejs -y 
-node --version
+4. **Update and upgrade EC2 and Install Nginx**
+   - Update :
+     ```bash
+     apt-get update
+     ```
 
-apt install npm -y
-npm --version
+   - Upgrade :
+     ```bash
+     apt-get upgrade -y
+     ```
+
+   - Install Nginx :
+     ```bash
+     apt-get install nginx
+     ```
+
+     
+   - check Nginx status:
+     ```bash
+     systemctl status nginx
+     ```
+
+     - check Nginx status:
+     ```bash
+     systemctl status nginx
+     ```
+    
+    - Install Node js and npm :
+
+     ```bash
+     apt install nodejs -y 
+    node --version # check node version
+    apt install npm -y
+    npm --version # check npm version
+     ```
+
 
 ----
 Backend :
