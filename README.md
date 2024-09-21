@@ -21,13 +21,11 @@ node --version
 apt install npm -y
 npm --version
 
-git clone https://github.com/UnpredictablePrashant/TravelMemory.git
--------
+----
 Backend :
 
 vi .env # add below
-# MONGO_URI='mongodb+srv://pkgajula1997:14f9m5KwJORsz8p8@travel1.heava.mongodb.net/travelmemory_pavan'
-# PORT=3001
+
 
 npm install 
 # node index.js
