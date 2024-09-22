@@ -100,7 +100,7 @@ Architecture diagram :
      systemctl status nginx
      ```
 
-## Task 1 - Backend Configuration
+## Task  - Backend Configuration
 - Clone the repository and navigate to the backend directory.
 - The backend runs on port 3000. Set up a reverse proxy using nginx to ensure smooth deployment on EC2.
 - Update the .env file to incorporate database connection details and port information.
@@ -186,3 +186,89 @@ The steps to task 1 solution are as follows:
         node index.js
         nohup node index.js > output.log 2>&1 & # backend run
      ```
+
+## Task  - Frondend Configuration
+- Clone the repository and navigate to the backend directory.
+- The backend runs on port 3001. Set up a reverse proxy using nginx to ensure smooth deployment on EC2.
+
+    
+### Solution
+The steps to task 1 solution are as follows:
+1. Clone the repository and navigate to the backend directory.
+   - Clone the repo  :
+     ```bash
+     git clone https://github.com/MrSRE/herovired_MERN-stack.git
+     ```
+
+2. Update the url.js file to incorporate database connection details and port information.
+     ```bash
+     cd TravelMemory
+     cd frontend
+     cd src
+     vi url.js
+     # inster and Add below 
+     export const baseUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";
+     ```
+
+3. start application  
+   - start  :
+     ```bash
+     npm install
+     ```
+
+6. Run  application as backend process  
+   - Run  :
+     ```bash
+      npm start
+     ``` 
+
+## Access the Application with below Public IP , LB and CNAME
+1. Public IP : 54.201.99.82
+
+<img width="955" alt="image" src="https://github.com/user-attachments/assets/185294c3-c80d-47ab-a2c2-27e413caf6cd">
+
+2. LB - http://travel-memory-lb-1524939564.us-west-2.elb.amazonaws.com/addexperience
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/9a5a8092-a9ad-461a-bed7-95ece4880848">
+
+3. DNS - https://travel.close.today/addexperience
+
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/35f48174-96a1-40f5-8072-67068a822db9">
+
+## Task - Scaling the Application
+  Create multiple instances of both the frontend and backend servers.
+  Add these instances to a load balancer to ensure efficient distribution of incoming traffic.
+
+- Create Launch Template  for backend servers
+
+<img width="774" alt="image" src="https://github.com/user-attachments/assets/c7ce7556-9a12-4ec4-94c2-87ea134f394d">
+
+- Create Auto Scaling Gorup from Above Launch Templates
+<img width="793" alt="image" src="https://github.com/user-attachments/assets/ff9463f8-f9b0-4a04-8cdc-13cd8a4d3a5e">
+
+- Details - 
+  - Desired capacity  - 2
+  - Minimum capacity  - 1
+  - Maximum capacity  - 3
+  - Scaling policy - Step Scaling - CPU utilization - 50 - 100 - 1 -
+
+<img width="768" alt="image" src="https://github.com/user-attachments/assets/12e8da78-8d57-462a-acc7-88f2f44159ab">
+
+
+### Solution
+- The frontend and backend servers are contained accross 2 instances for test:
+
+- Added these instances to my target group. I have named my target group as 
+
+- My load balancer to point to Target group (vish-tg) is as follows:
+
+## Task 4 - Domain Setup with Cloudflare
+- Connect your custom domain to the application using Cloudflare.
+- Create a CNAME record pointing to the load balancer endpoint.
+- Set up an A record with the IP address of the EC2 instance hosting the front end.
+### Solution
+*I was unable to purchase a cloudflare domain or transfer my GoDaddy domain to cloudflare so I will be setting DNS via GoDaddy Panel.*
+1. My GoDaddy domain DNS setting is as follows for adding ELB DNS to my domain records:
+
+2. After successful DNS addition the domain is as follows:
+
