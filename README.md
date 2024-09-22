@@ -822,7 +822,6 @@ The steps to task 1 solution are as follows:
 ### Solution
 *I was unable to purchase a cloudflare domain or transfer my GoDaddy domain to cloudflare so I will be setting DNS via GoDaddy Panel.*
 1. My GoDaddy domain DNS setting is as follows for adding ELB DNS to my domain records:
-
 2. After successful DNS addition the domain is as follows:
 - Create a CNAME record pointing to the load balancer endpoint.
 - Set up an A record with the IP address of the EC2 instance hosting the front end.
@@ -834,4 +833,3 @@ The steps to task 1 solution are as follows:
 
 2. After successful DNS addition the domain is as follows:
 <img width="953" alt="image" src="https://github.com/user-attachments/assets/9927d832-37da-4017-ab3b-1effaa43c816">
-
